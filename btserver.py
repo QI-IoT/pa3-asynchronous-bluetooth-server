@@ -1,7 +1,7 @@
 import asyncore
 import logging
 from bluetooth import *
-from bthandler import BTHandler
+from bthandler import BTClientHandler
 
 logger = logging.getLogger(__name__)
 
@@ -21,15 +21,15 @@ class BTServer(asyncore.dispatcher):
         self.service_name = service_name
         self.port = port
 
-        # Create BT socket
+        # Create the server-side BT socket
         self.set_socket(BluetoothSocket(RFCOMM))
-        self.bind(("", port))
+        self.bind(("", self.port))
         self.listen(1)
 
         advertise_service(self.socket,
-                          service_name,
-                          service_id=uuid,
-                          service_classes=[uuid, SERIAL_PORT_CLASS],
+                          self.service_name,
+                          service_id=self.uuid,
+                          service_classes=[self.uuid, SERIAL_PORT_CLASS],
                           profiles=[SERIAL_PORT_PROFILE]
                           )
 
@@ -38,15 +38,18 @@ class BTServer(asyncore.dispatcher):
         print "Waiting for connection on RFCOMM channel %d" % self.port
 
     def handle_accept(self):
+        # This method is called when an incoming connection request from a client is accept.
+        # Get the client-side BT socket
         pair = self.socket.accept()
 
         if pair is not None:
-            sock, addr = pair
-            logger.info("Accepted connection from %s" % repr(addr[0]))
-            print "Accepted connection from %s" % repr(addr[0])
-            handler = BTHandler(socket=sock, server=self)
+            client_sock, client_addr = pair
+            logger.info("Accepted connection from %s" % repr(client_addr[0]))
+            print "Accepted connection from %s" % repr(client_addr[0])
+            handler = BTClientHandler(socket=client_sock, server=self)
 
     def handle_connect(self):
+        # This method is called when the connection is established.
         pass
 
     def handle_close(self):
