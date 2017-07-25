@@ -29,8 +29,10 @@ your UDOO board. Run the following script:
 ```
 $ sudo bluez-simple-agent
 ```
-After you pair your Android device with your UDOO board, you need to add
-the serial port profile
+You only need to pair UDOO board with your Android phone once. Once they
+are paired, you can skip this step in the future. After you pair your
+Android device with your UDOO board, you need to add the serial port
+profile
 ```
 $ sudo sdptool add sp
 ```
