@@ -36,7 +36,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
         except Exception as e:
             BTError.print_error(handler=self, error=BTError.ERR_READ, error_message=repr(e))
             self.data = ""
-            self.close()
+            self.handle_close()
 
     def handle_close(self):
         # flush the buffer
