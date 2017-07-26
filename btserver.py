@@ -47,10 +47,13 @@ class BTServer(asyncore.dispatcher):
 
         if pair is not None:
             client_sock, client_addr = pair
-            logger.info("Accepted connection from %s" % repr(client_addr[0]))
-            print "Accepted connection from %s" % repr(client_addr[0])
             client_handler = BTClientHandler(socket=client_sock, server=self)
             self.active_client_handlers.add(client_handler)
+
+            logger.info("Accepted connection from %s," % repr(client_addr[0]) +
+                        " number of active connections is %d" % len(self.active_client_handlers))
+            print "Accepted connection from %s," % repr(client_addr[0]) + \
+                  " number of active connections is %d" % len(self.active_client_handlers)
 
     def handle_connect(self):
         # This method is called when the connection is established.
