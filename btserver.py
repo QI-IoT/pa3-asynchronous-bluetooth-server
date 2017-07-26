@@ -26,6 +26,9 @@ class BTServer(asyncore.dispatcher):
         self.bind(("", self.port))
         self.listen(1)
 
+        # Track the client-side handlers with a set
+        self.active_client_handlers = set()
+
         advertise_service(self.socket,
                           self.service_name,
                           service_id=self.uuid,
@@ -46,13 +49,16 @@ class BTServer(asyncore.dispatcher):
             client_sock, client_addr = pair
             logger.info("Accepted connection from %s" % repr(client_addr[0]))
             print "Accepted connection from %s" % repr(client_addr[0])
-            handler = BTClientHandler(socket=client_sock, server=self)
+            client_handler = BTClientHandler(socket=client_sock, server=self)
+            self.active_client_handlers.add(client_handler)
 
     def handle_connect(self):
         # This method is called when the connection is established.
         pass
 
     def handle_close(self):
+        # This method is called right before closing the server socket only. For closing a client socket, refer to
+        #  'bthandler.py'
         self.close()
 
 if __name__ == '__main__':
