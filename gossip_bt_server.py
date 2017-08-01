@@ -44,6 +44,7 @@ if __name__ == '__main__':
             elif args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
+                          'temp': temp,
                           'SN1': SN1,
                           'SN2': SN2,
                           'SN3': SN3,
