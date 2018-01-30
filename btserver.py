@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class BTServer(asyncore.dispatcher):
-    """Asynchronous Bluetooth  Server"""
+    """Asynchronous Bluetooth Server"""
 
     def __init__(self, uuid, service_name, port=PORT_ANY):
         asyncore.dispatcher.__init__(self)

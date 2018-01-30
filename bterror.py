@@ -6,9 +6,9 @@ class BTError(object):
     ERR_WRITE = -5
 
     ERROR_MSG = {
-        ERR_UNKNOWN:    "Unknown error",
-        ERR_NO_CMD:     "No command given",
-        ERR_UNKNOWN_CMD:   "Unknown command"
+        ERR_UNKNOWN:        "Unknown error",
+        ERR_NO_CMD:         "No command given",
+        ERR_UNKNOWN_CMD:    "Unknown command"
     }
 
     @staticmethod
