@@ -29,7 +29,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
                 self.data += data[:lf_char_index]
                 print("received [{}]".format(self.data))
 
-                self.send(self.data + '\n')
+                self.send((self.data + '\n').encode('ascii'))
 
                 # Clear the buffer
                 self.data = ""
