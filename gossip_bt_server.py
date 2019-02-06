@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
             msg = ""
             if args.output_format == "csv":
-                msg = "realtime, %d, %f, %f, %f, %f, %f, %f" % (epoch_time, temp, SN1, SN2, SN3, SN4, PM25)
+                msg = "realtime, {}, {}, {}, {}, {}, {}, {}".format(epoch_time, temp, SN1, SN2, SN3, SN4, PM25)
             elif args.output_format == "json":
                 output = {'type': 'realtime',
                           'time': epoch_time,
@@ -52,7 +52,7 @@ if __name__ == '__main__':
                           'PM25': PM25}
                 msg = json.dumps(output)
             try:
-                client_handler.send(msg + '\n')
+                client_handler.send((msg + '\n').encode('ascii'))
             except Exception as e:
                 BTError.print_error(handler=client_handler, error=BTError.ERR_WRITE, error_message=repr(e))
                 client_handler.handle_close()

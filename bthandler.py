@@ -27,7 +27,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
             else:
                 # We see a new line character in data, so append rest and handle.
                 self.data += data[:lf_char_index]
-                print "received [%s]" % self.data
+                print("received [{}]".format(self.data))
 
                 self.send(self.data + '\n')
 

@@ -7,11 +7,18 @@ received and send them back through Bluetooth channel.
 
 The required modules are
 
-1.  PyBluez
+1. python3-pip
+
+To install `python3-pip`, run the following command:
+```
+$ sudo apt-get install python3-pip
+```
+
+2.  PyBluez
 
 They can be installed with the following command:
 ```
-$ sudo pip install -r requirements.txt
+$ sudo python3 -m pip install -r requirements.txt
 ```
 If you encounter errors during the installation, please refer to FAQ
 section.
@@ -40,7 +47,7 @@ $ sudo sdptool add sp
 # Usage
 Run the following command on an UDOO Neo to start RFCOMM server:
 ```
-$ python btserver.py
+$ python3 gossip_bt_server.py
 ```
 
 # FAQ

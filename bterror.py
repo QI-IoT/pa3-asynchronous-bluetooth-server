@@ -16,5 +16,5 @@ class BTError(object):
         if len(error_message) < 1:
             error_message = BTError.ERROR_MSG[error]
 
-        print "Error %d: %s" % (error, error_message)
+        print("Error {}: {}".format(error, error_message))
         #handler.send_error(error_code=error, error_message=error_message)
