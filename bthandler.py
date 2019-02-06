@@ -15,7 +15,7 @@ class BTClientHandler(asyncore.dispatcher_with_send):
 
     def handle_read(self):
         try:
-            data = self.recv(1024)
+            data = self.recv(1024).decode('ascii')
             if not data:
                 return
 
